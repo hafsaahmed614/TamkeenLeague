@@ -50,8 +50,7 @@ if connected:
                 location = st.text_input("Location", placeholder="e.g., Main Gym, Court 1")
 
             with col2:
-                away_options = [t for t in team_options.keys() if t != home_team]
-                away_team = st.selectbox("Away Team", options=away_options if away_options else ["Select home team first"])
+                away_team = st.selectbox("Away Team", options=list(team_options.keys()))
 
                 # Time input in 12-hour format
                 st.write("Game Time")
