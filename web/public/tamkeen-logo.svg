@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#532127"/>
+  <g fill="#f8edeb" transform="translate(50,50)">
+    <!-- Stylized Arabic calligraphy pattern representing Tamkeen logo -->
+    <path d="M-25,-20 Q-20,-25 -15,-20 L-15,15 Q-15,20 -20,20 L-25,20 Q-30,20 -30,15 L-30,-15 Q-30,-20 -25,-20 Z"/>
+    <path d="M-10,-25 Q-5,-30 0,-25 L0,20 Q0,25 -5,25 L-10,25 Q-15,25 -15,20 L-15,-20 Q-15,-25 -10,-25 Z"/>
+    <path d="M5,-20 Q10,-25 15,-20 L15,15 Q15,20 10,20 L5,20 Q0,20 0,15 L0,-15 Q0,-20 5,-20 Z"/>
+    <path d="M20,-25 Q25,-30 30,-25 L30,15 Q30,20 25,20 L20,20 Q15,20 15,15 L15,-20 Q15,-25 20,-25 Z"/>
+    <!-- Circular decorative elements -->
+    <circle cx="-22" cy="-30" r="4"/>
+    <circle cx="22" cy="-30" r="4"/>
+    <circle cx="0" cy="32" r="4"/>
+    <!-- Connecting arcs -->
+    <path d="M-30,0 Q-35,15 -25,25" fill="none" stroke="#f8edeb" stroke-width="3"/>
+    <path d="M30,0 Q35,15 25,25" fill="none" stroke="#f8edeb" stroke-width="3"/>
+  </g>
+</svg>

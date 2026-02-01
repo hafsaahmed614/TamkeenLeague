@@ -69,11 +69,11 @@ export function Standings() {
                 key={team.id}
                 to={`/team/${team.name}`}
                 className={`grid grid-cols-[auto_1fr_repeat(4,minmax(0,1fr))] gap-2 px-4 py-3 items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                  team.name === selectedTeamName ? 'bg-tamkeen-red/5' : ''
+                  team.name === selectedTeamName ? 'bg-tamkeen-primary/5' : ''
                 } ${index < standings.length - 1 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}
               >
                 <span className="w-8 font-medium text-gray-500">{team.rank}</span>
-                <span className={`font-medium truncate ${team.name === selectedTeamName ? 'text-tamkeen-red' : ''}`}>
+                <span className={`font-medium truncate ${team.name === selectedTeamName ? 'text-tamkeen-primary' : ''}`}>
                   {team.name}
                 </span>
                 <span className="text-center font-semibold">{team.wins}-{team.losses}</span>

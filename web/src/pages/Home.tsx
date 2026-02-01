@@ -78,7 +78,7 @@ export function Home() {
         {/* Team Stats Card (if team selected) */}
         {selectedTeamName && myTeamStanding && (
           <Link to={`/team/${selectedTeamName}`} className="block">
-            <div className="card p-4 bg-tamkeen-red text-white">
+            <div className="card p-4 bg-tamkeen-primary text-white">
               <div className="flex justify-between items-center mb-3">
                 <span className="text-sm opacity-80">Your Team</span>
                 <span className="text-sm bg-white/20 px-2 py-0.5 rounded-full">
@@ -140,7 +140,7 @@ export function Home() {
         <section>
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Standings</h2>
-            <Link to="/standings" className="text-sm text-tamkeen-red font-medium">
+            <Link to="/standings" className="text-sm text-tamkeen-primary font-medium">
               See All
             </Link>
           </div>
@@ -155,14 +155,14 @@ export function Home() {
                   key={team.id}
                   to={`/team/${team.name}`}
                   className={`flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
-                    team.name === selectedTeamName ? 'bg-tamkeen-red/5' : ''
+                    team.name === selectedTeamName ? 'bg-tamkeen-primary/5' : ''
                   } ${index < 4 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}
                 >
                   <div className="flex items-center gap-3">
                     <span className="w-6 text-center font-medium text-gray-500">
                       {team.rank}
                     </span>
-                    <span className={`font-medium ${team.name === selectedTeamName ? 'text-tamkeen-red' : ''}`}>
+                    <span className={`font-medium ${team.name === selectedTeamName ? 'text-tamkeen-primary' : ''}`}>
                       {team.name}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export function Home() {
         <section>
           <div className="flex justify-between items-center mb-3">
             <h2 className="text-lg font-semibold">Top Scorers</h2>
-            <Link to="/leaderboard" className="text-sm text-tamkeen-red font-medium">
+            <Link to="/leaderboard" className="text-sm text-tamkeen-primary font-medium">
               See All
             </Link>
           </div>
@@ -197,7 +197,7 @@ export function Home() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-tamkeen-red/10 text-tamkeen-red text-sm font-bold">
+                    <span className="w-6 h-6 flex items-center justify-center rounded-full bg-tamkeen-primary/10 text-tamkeen-primary text-sm font-bold">
                       {index + 1}
                     </span>
                     <div>

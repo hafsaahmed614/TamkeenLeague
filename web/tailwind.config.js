@@ -10,15 +10,18 @@ export default {
       colors: {
         // Tamkeen Brand Colors
         tamkeen: {
-          red: '#8B0000',
-          'red-dark': '#6B0000',
-          'red-light': '#A52A2A',
-          black: '#000000',
-          white: '#FFFFFF',
+          primary: '#532127',      // Dark maroon - main brand color
+          secondary: '#f8edeb',    // Light pink/cream - backgrounds
+          text: '#ffffff',         // White - text on dark backgrounds
+          accent: '#61ce70',       // Green - highlights, success states
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        // Tamkeen Brand Fonts
+        sans: ['Open Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Montserrat', 'system-ui', 'sans-serif'],
+        body: ['Roboto', 'system-ui', 'sans-serif'],
+        accent: ['Poppins', 'system-ui', 'sans-serif'],
       },
       spacing: {
         'safe-bottom': 'env(safe-area-inset-bottom)',

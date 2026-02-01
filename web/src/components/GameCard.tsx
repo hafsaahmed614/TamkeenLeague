@@ -46,22 +46,22 @@ export function GameCard({ game, homeScore = 0, awayScore = 0 }: GameCardProps) 
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className={`font-medium ${showScores && homeScore > awayScore ? 'text-tamkeen-red' : ''}`}>
+            <span className={`font-medium ${showScores && homeScore > awayScore ? 'text-tamkeen-primary' : ''}`}>
               {game.home_team_name}
             </span>
             {showScores && (
-              <span className={`text-xl font-bold ${homeScore > awayScore ? 'text-tamkeen-red' : ''}`}>
+              <span className={`text-xl font-bold ${homeScore > awayScore ? 'text-tamkeen-primary' : ''}`}>
                 {homeScore}
               </span>
             )}
           </div>
 
           <div className="flex justify-between items-center">
-            <span className={`font-medium ${showScores && awayScore > homeScore ? 'text-tamkeen-red' : ''}`}>
+            <span className={`font-medium ${showScores && awayScore > homeScore ? 'text-tamkeen-primary' : ''}`}>
               {game.away_team_name}
             </span>
             {showScores && (
-              <span className={`text-xl font-bold ${awayScore > homeScore ? 'text-tamkeen-red' : ''}`}>
+              <span className={`text-xl font-bold ${awayScore > homeScore ? 'text-tamkeen-primary' : ''}`}>
                 {awayScore}
               </span>
             )}

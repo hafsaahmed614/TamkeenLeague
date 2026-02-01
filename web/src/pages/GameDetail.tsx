@@ -75,7 +75,7 @@ export function GameDetail() {
       />
 
       {/* Game header / Scoreboard */}
-      <div className={`p-6 ${isLive ? 'bg-green-600' : isFinal ? 'bg-gray-800' : 'bg-tamkeen-red'} text-white`}>
+      <div className={`p-6 ${isLive ? 'bg-green-600' : isFinal ? 'bg-gray-800' : 'bg-tamkeen-primary'} text-white`}>
         {/* Status badge */}
         <div className="flex justify-center mb-4">
           {isLive && (

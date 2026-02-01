@@ -79,7 +79,7 @@ export function Schedule() {
           !selectedTeamName && (
             <Link
               to="/select-team"
-              className="text-sm text-tamkeen-red font-medium"
+              className="text-sm text-tamkeen-primary font-medium"
             >
               Filter by team
             </Link>
@@ -96,7 +96,7 @@ export function Schedule() {
               onClick={() => setFilter(status)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                 filter === status
-                  ? 'bg-tamkeen-red text-white'
+                  ? 'bg-tamkeen-primary text-white'
                   : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
               }`}
             >

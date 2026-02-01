@@ -10,8 +10,12 @@
   }
 
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
-    @apply min-h-screen;
+    @apply bg-tamkeen-secondary dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply min-h-screen font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 
   /* Safe area padding for notched devices */
@@ -26,17 +30,22 @@
   .btn {
     @apply min-h-touch min-w-touch px-4 py-2 rounded-lg font-medium;
     @apply transition-colors duration-200;
-    @apply flex items-center justify-center;
+    @apply flex items-center justify-center font-accent;
   }
 
   .btn-primary {
-    @apply btn bg-tamkeen-red text-white;
-    @apply hover:bg-tamkeen-red-dark active:bg-tamkeen-red-dark;
+    @apply btn bg-tamkeen-primary text-tamkeen-text;
+    @apply hover:opacity-90 active:opacity-80;
   }
 
   .btn-secondary {
     @apply btn bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
     @apply hover:bg-gray-200 dark:hover:bg-gray-700;
+  }
+
+  .btn-accent {
+    @apply btn bg-tamkeen-accent text-white;
+    @apply hover:opacity-90 active:opacity-80;
   }
 
   /* Card component */
@@ -54,7 +63,7 @@
   }
 
   .nav-item.active {
-    @apply text-tamkeen-red;
+    @apply text-tamkeen-primary;
   }
 
   /* Pull to refresh indicator */

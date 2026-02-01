@@ -73,7 +73,7 @@ export function TeamDetail() {
       <Header title={decodedTeamName} showBack />
 
       {/* Team header */}
-      <div className="bg-tamkeen-red text-white p-6">
+      <div className="bg-tamkeen-primary text-white p-6">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
             <span className="text-3xl font-bold">{decodedTeamName.charAt(0)}</span>
@@ -117,7 +117,7 @@ export function TeamDetail() {
           onClick={() => setTab('roster')}
           className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
             tab === 'roster'
-              ? 'border-tamkeen-red text-tamkeen-red'
+              ? 'border-tamkeen-primary text-tamkeen-primary'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -127,7 +127,7 @@ export function TeamDetail() {
           onClick={() => setTab('games')}
           className={`flex-1 py-3 text-sm font-medium border-b-2 transition-colors ${
             tab === 'games'
-              ? 'border-tamkeen-red text-tamkeen-red'
+              ? 'border-tamkeen-primary text-tamkeen-primary'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -160,8 +160,8 @@ export function TeamDetail() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-tamkeen-red/10 rounded-full flex items-center justify-center">
-                      <span className="text-tamkeen-red font-bold">#{player.jersey_number}</span>
+                    <div className="w-10 h-10 bg-tamkeen-primary/10 rounded-full flex items-center justify-center">
+                      <span className="text-tamkeen-primary font-bold">#{player.jersey_number}</span>
                     </div>
                     <span className="font-medium">{player.name}</span>
                   </div>

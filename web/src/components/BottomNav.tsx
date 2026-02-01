@@ -48,7 +48,7 @@ export function BottomNav() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `nav-item flex-1 ${isActive ? 'active text-tamkeen-red' : ''}`
+              `nav-item flex-1 ${isActive ? 'active text-tamkeen-primary' : ''}`
             }
           >
             {item.icon}

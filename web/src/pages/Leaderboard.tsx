@@ -65,7 +65,7 @@ export function Leaderboard() {
                 </div>
                 <div className="text-center">
                   <div className="font-bold truncate max-w-[100px]">{players[0].player_name}</div>
-                  <div className="text-sm text-tamkeen-red font-semibold">{players[0].total_points} PTS</div>
+                  <div className="text-sm text-tamkeen-primary font-semibold">{players[0].total_points} PTS</div>
                 </div>
               </div>
 

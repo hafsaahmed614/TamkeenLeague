@@ -39,15 +39,15 @@ export function TeamSelector() {
       <div className="min-h-screen flex flex-col p-6">
         {/* Logo area */}
         <div className="flex-1 flex flex-col items-center justify-center mb-8">
-          <div className="w-24 h-24 bg-tamkeen-red rounded-full flex items-center justify-center mb-6">
-            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <img
+            src="/tamkeen-logo.svg"
+            alt="Tamkeen League"
+            className="w-24 h-24 mb-6"
+          />
+          <h1 className="text-2xl font-bold font-heading text-tamkeen-primary dark:text-white mb-2">
             Tamkeen League
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-center">
+          <p className="text-gray-500 dark:text-gray-400 text-center font-body">
             Select your team to get started
           </p>
         </div>
@@ -61,7 +61,7 @@ export function TeamSelector() {
               className="w-full card p-4 flex items-center justify-between hover:shadow-md transition-shadow active:scale-[0.98]"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-tamkeen-red rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-tamkeen-primary rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
                     {team.name.charAt(0)}
                   </span>
@@ -89,7 +89,7 @@ export function TeamSelector() {
               setSelectedTeam(null)
               navigate('/')
             }}
-            className="text-tamkeen-red font-medium hover:underline"
+            className="text-tamkeen-primary font-medium hover:underline"
           >
             View all teams instead
           </button>
