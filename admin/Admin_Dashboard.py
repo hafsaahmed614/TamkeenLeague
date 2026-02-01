@@ -13,10 +13,10 @@ st.markdown("""
 <style>
     .main-header {
         color: #8B0000;
-        font-size: 2.5rem;
+        font-size: 4rem;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
     .sub-header {
         color: #333;
@@ -65,8 +65,3 @@ with col2:
     if st.button("Open Live Scorer", key="nav_scorer", use_container_width=True):
         st.switch_page("pages/4_Live_Scorer.py")
 
-st.divider()
-
-# Quick stats section
-st.markdown("### Quick Stats")
-st.info("Connect to Supabase to see league statistics. Set your credentials in the .env file.")
