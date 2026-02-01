@@ -48,7 +48,7 @@ export function TeamSelector() {
             Tamkeen League
           </h1>
           <p className="text-gray-500 dark:text-gray-400 text-center font-body">
-            Select your team to get started
+            Select Your Team
           </p>
         </div>
 
