@@ -40,7 +40,7 @@ export function TeamSelector() {
         {/* Logo area */}
         <div className="flex-1 flex flex-col items-center justify-center mb-8">
           <img
-            src="/tamkeen-logo.svg"
+            src="https://tamkeensports.org/wp-content/uploads/2025/07/Maroon-transparent-logo-scaled-100x100.png"
             alt="Tamkeen League"
             className="w-24 h-24 mb-6"
           />
