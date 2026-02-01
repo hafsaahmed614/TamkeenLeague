@@ -35,8 +35,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main content
-st.markdown('<p class="main-header">Tamkeen Sports League</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">Admin Dashboard</p>', unsafe_allow_html=True)
+st.markdown('<h1 style="color: #8B0000; font-size: 72px; font-weight: bold; text-align: center; margin-bottom: 0;">Tamkeen Sports League</h1>', unsafe_allow_html=True)
+st.markdown('<p style="color: #888; text-align: center; font-size: 24px; margin-top: 0;">Admin Dashboard</p>', unsafe_allow_html=True)
 
 st.divider()
 
