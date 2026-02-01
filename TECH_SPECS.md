@@ -29,6 +29,15 @@ To ensure rapid data validation before focusing on UI polish, development will b
     * Reads data from the database populated in Phase 1.
     * Focuses on performance, branding (UI/UX), and real-time updates.
 
+### Future: Admin Migration to React
+* **Goal:** Consolidate both admin and public interfaces into a single React application.
+* **Approach:**
+    * Add protected admin routes to the React app using Supabase Auth.
+    * Rebuild Streamlit admin functionality (team management, live scoring, etc.) as React components.
+    * Retire the Streamlit app once feature parity is achieved.
+* **Benefits:** Single codebase, unified deployment, consistent UI/UX across admin and public views.
+* **Timeline:** After Phase 2 is stable and the first season is complete.
+
 ---
 
 ## 3. User Roles
