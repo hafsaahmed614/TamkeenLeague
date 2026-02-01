@@ -12,12 +12,6 @@ export function useGames(teamName?: string | null, status?: Game['status']) {
       setLoading(true)
       let query = supabase.from('games').select('*')
 
-      if (teamName) {
-        // Properly escape team names with special characters
-        const escapedName = teamName.replace(/"/g, '\\"')
-        query = query.or(`home_team_name.eq."${escapedName}",away_team_name.eq."${escapedName}"`)
-      }
-
       if (status) {
         query = query.eq('status', status)
       }
@@ -25,7 +19,16 @@ export function useGames(teamName?: string | null, status?: Game['status']) {
       const { data, error } = await query.order('start_time', { ascending: true })
 
       if (error) throw error
-      setGames(data || [])
+
+      // Filter by team name client-side to handle spaces correctly
+      let filteredGames = data || []
+      if (teamName) {
+        filteredGames = filteredGames.filter(
+          g => g.home_team_name === teamName || g.away_team_name === teamName
+        )
+      }
+
+      setGames(filteredGames)
       setError(null)
     } catch (e) {
       setError((e as Error).message)
