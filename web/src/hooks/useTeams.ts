@@ -51,10 +51,10 @@ export function useTeam(teamName: string | null) {
           .from('teams')
           .select('*')
           .eq('name', teamName)
-          .single()
+          .limit(1)
 
         if (error) throw error
-        setTeam(data)
+        setTeam(data && data.length > 0 ? data[0] : null)
         setError(null)
       } catch (e) {
         setError((e as Error).message)

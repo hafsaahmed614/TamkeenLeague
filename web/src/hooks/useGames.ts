@@ -13,7 +13,9 @@ export function useGames(teamName?: string | null, status?: Game['status']) {
       let query = supabase.from('games').select('*')
 
       if (teamName) {
-        query = query.or(`home_team_name.eq.${teamName},away_team_name.eq.${teamName}`)
+        // Properly escape team names with special characters
+        const escapedName = teamName.replace(/"/g, '\\"')
+        query = query.or(`home_team_name.eq."${escapedName}",away_team_name.eq."${escapedName}"`)
       }
 
       if (status) {
@@ -60,9 +62,11 @@ export function useGameWithScores(gameId: number | null) {
         .from('games')
         .select('*')
         .eq('id', gameId)
-        .single()
+        .limit(1)
 
       if (gameError) throw gameError
+      if (!gameData || gameData.length === 0) throw new Error('Game not found')
+      const game = gameData[0]
 
       // Fetch score logs for this game
       const { data: logsData, error: logsError } = await supabase
@@ -75,15 +79,15 @@ export function useGameWithScores(gameId: number | null) {
 
       // Calculate scores
       const homeScore = (logsData || [])
-        .filter((log: ScoreLog) => log.team_name === gameData.home_team_name)
+        .filter((log: ScoreLog) => log.team_name === game.home_team_name)
         .reduce((sum: number, log: ScoreLog) => sum + log.points, 0)
 
       const awayScore = (logsData || [])
-        .filter((log: ScoreLog) => log.team_name === gameData.away_team_name)
+        .filter((log: ScoreLog) => log.team_name === game.away_team_name)
         .reduce((sum: number, log: ScoreLog) => sum + log.points, 0)
 
       setGame({
-        ...gameData,
+        ...game,
         home_score: homeScore,
         away_score: awayScore
       })
