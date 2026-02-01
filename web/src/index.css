@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  html {
+    @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply min-h-screen;
+  }
+
+  /* Safe area padding for notched devices */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Touch-friendly button base */
+  .btn {
+    @apply min-h-touch min-w-touch px-4 py-2 rounded-lg font-medium;
+    @apply transition-colors duration-200;
+    @apply flex items-center justify-center;
+  }
+
+  .btn-primary {
+    @apply btn bg-tamkeen-red text-white;
+    @apply hover:bg-tamkeen-red-dark active:bg-tamkeen-red-dark;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+    @apply hover:bg-gray-200 dark:hover:bg-gray-700;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm;
+    @apply border border-gray-100 dark:border-gray-700;
+  }
+
+  /* Navigation item */
+  .nav-item {
+    @apply flex flex-col items-center justify-center;
+    @apply min-h-touch min-w-touch p-2;
+    @apply text-gray-500 dark:text-gray-400;
+    @apply transition-colors duration-200;
+  }
+
+  .nav-item.active {
+    @apply text-tamkeen-red;
+  }
+
+  /* Pull to refresh indicator */
+  .pull-indicator {
+    @apply flex items-center justify-center py-4;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+  }
+
+  /* Score badge */
+  .score-badge {
+    @apply inline-flex items-center justify-center;
+    @apply min-w-[2.5rem] px-2 py-1 rounded-full;
+    @apply font-bold text-lg;
+  }
+
+  /* Status badges */
+  .status-live {
+    @apply bg-green-500 text-white text-xs px-2 py-0.5 rounded-full;
+    @apply animate-pulse;
+  }
+
+  .status-final {
+    @apply bg-gray-500 text-white text-xs px-2 py-0.5 rounded-full;
+  }
+
+  .status-scheduled {
+    @apply bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Safe area utilities */
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
