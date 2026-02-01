@@ -6,6 +6,29 @@ from config.supabase import get_supabase_client
 
 st.set_page_config(page_title="Teams - Tamkeen Admin", page_icon="🏀", layout="wide")
 
+# Mobile-friendly CSS
+st.markdown("""
+<style>
+    .team-card {
+        padding: 12px 0;
+        border-bottom: 1px solid #333;
+    }
+    .team-name {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+    .team-record {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 12px;
+    }
+    .record-item {
+        font-size: 14px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("Team Management")
 st.divider()
 
@@ -49,21 +72,16 @@ if connected:
     if teams:
         for team in teams:
             with st.container():
-                col1, col2, col3, col4, col5 = st.columns([3, 1, 1, 1, 1])
+                # Team name and record on one line
+                st.markdown(f"**{team['name']}** — Record: {team['wins']}-{team['losses']}")
 
-                with col1:
-                    st.markdown(f"**{team['name']}**")
-                with col2:
-                    st.metric("Wins", team['wins'])
-                with col3:
-                    st.metric("Losses", team['losses'])
-                with col4:
-                    # Edit button
-                    if st.button("Edit", key=f"edit_{team['id']}"):
+                # Action buttons side by side
+                btn_col1, btn_col2, btn_col3 = st.columns([1, 1, 2])
+                with btn_col1:
+                    if st.button("Edit", key=f"edit_{team['id']}", use_container_width=True):
                         st.session_state[f"editing_{team['id']}"] = True
-                with col5:
-                    # Delete button
-                    if st.button("Delete", key=f"delete_{team['id']}"):
+                with btn_col2:
+                    if st.button("Delete", key=f"delete_{team['id']}", use_container_width=True):
                         try:
                             supabase.table("teams").delete().eq("id", team['id']).execute()
                             st.success(f"Team '{team['name']}' deleted!")
