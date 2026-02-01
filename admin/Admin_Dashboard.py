@@ -8,20 +8,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Tamkeen branding
+# Custom CSS for Tamkeen branding with mobile responsiveness
 st.markdown("""
 <style>
-    .main-header {
+    .main-title {
         color: #8B0000;
-        font-size: 15rem;
+        font-size: 48px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
+        line-height: 1.2;
     }
-    .sub-header {
-        color: #333;
+    .sub-title {
+        color: #888;
         text-align: center;
-        margin-bottom: 2rem;
+        font-size: 18px;
+        margin-top: 8px;
     }
     .stButton > button {
         background-color: #8B0000;
@@ -31,12 +33,22 @@ st.markdown("""
         background-color: #660000;
         color: white;
     }
+
+    /* Desktop styles */
+    @media (min-width: 768px) {
+        .main-title {
+            font-size: 72px;
+        }
+        .sub-title {
+            font-size: 24px;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # Main content
-st.markdown('<h1 style="color: #8B0000; font-size: 72px; font-weight: bold; text-align: center; margin-bottom: 0;">Tamkeen Sports League</h1>', unsafe_allow_html=True)
-st.markdown('<p style="color: #888; text-align: center; font-size: 24px; margin-top: 0;">Admin Dashboard</p>', unsafe_allow_html=True)
+st.markdown('<h1 class="main-title">Tamkeen Sports League</h1>', unsafe_allow_html=True)
+st.markdown('<p class="sub-title">Admin Dashboard</p>', unsafe_allow_html=True)
 
 st.divider()
 
