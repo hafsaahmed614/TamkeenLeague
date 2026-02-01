@@ -52,7 +52,22 @@ if connected:
             with col2:
                 away_options = [t for t in team_options.keys() if t != home_team]
                 away_team = st.selectbox("Away Team", options=away_options if away_options else ["Select home team first"])
-                game_time = st.time_input("Game Time", value=time(18, 0))
+
+                # Time input in 12-hour format
+                st.write("Game Time")
+                time_col1, time_col2, time_col3 = st.columns(3)
+                with time_col1:
+                    hour = st.selectbox("Hour", options=list(range(1, 13)), index=5)
+                with time_col2:
+                    minute = st.selectbox("Min", options=["00", "15", "30", "45"], index=0)
+                with time_col3:
+                    period = st.selectbox("AM/PM", options=["AM", "PM"], index=1)
+
+                # Convert to 24-hour time object
+                hour_24 = hour if period == "AM" else (hour + 12 if hour != 12 else 12)
+                if period == "AM" and hour == 12:
+                    hour_24 = 0
+                game_time = time(hour_24, int(minute))
 
             submitted = st.form_submit_button("Create Game", use_container_width=True)
 
@@ -145,7 +160,30 @@ if connected:
                             new_location = st.text_input("Location", value=game['location'])
                         with edit_col3:
                             new_date = st.date_input("Date", value=start_time.date())
-                            new_time = st.time_input("Time", value=start_time.time())
+
+                            # Time in 12-hour format
+                            existing_hour = start_time.hour
+                            existing_minute = start_time.minute
+                            existing_period = "AM" if existing_hour < 12 else "PM"
+                            existing_hour_12 = existing_hour if existing_hour <= 12 else existing_hour - 12
+                            if existing_hour_12 == 0:
+                                existing_hour_12 = 12
+
+                            edit_time_col1, edit_time_col2, edit_time_col3 = st.columns(3)
+                            with edit_time_col1:
+                                edit_hour = st.selectbox("Hr", options=list(range(1, 13)), index=existing_hour_12 - 1, key=f"edit_hour_{game['id']}")
+                            with edit_time_col2:
+                                min_options = ["00", "15", "30", "45"]
+                                min_idx = min_options.index(f"{existing_minute:02d}") if f"{existing_minute:02d}" in min_options else 0
+                                edit_minute = st.selectbox("Min", options=min_options, index=min_idx, key=f"edit_min_{game['id']}")
+                            with edit_time_col3:
+                                edit_period = st.selectbox("", options=["AM", "PM"], index=0 if existing_period == "AM" else 1, key=f"edit_period_{game['id']}")
+
+                            # Convert to 24-hour
+                            new_hour_24 = edit_hour if edit_period == "AM" else (edit_hour + 12 if edit_hour != 12 else 12)
+                            if edit_period == "AM" and edit_hour == 12:
+                                new_hour_24 = 0
+                            new_time = time(new_hour_24, int(edit_minute))
 
                         btn_col1, btn_col2, btn_col3 = st.columns(3)
                         with btn_col1:

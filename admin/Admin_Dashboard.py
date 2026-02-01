@@ -47,23 +47,23 @@ with col1:
     st.markdown("### Teams")
     st.write("Create and manage league teams")
     if st.button("Manage Teams", key="nav_teams", use_container_width=True):
-        st.switch_page("pages/1_teams.py")
+        st.switch_page("pages/1_Teams.py")
 
     st.markdown("### Schedule")
     st.write("Create game slots and manage the season calendar")
     if st.button("Manage Schedule", key="nav_schedule", use_container_width=True):
-        st.switch_page("pages/3_schedule.py")
+        st.switch_page("pages/3_Schedule.py")
 
 with col2:
     st.markdown("### Players")
     st.write("Manage team rosters and player information")
     if st.button("Manage Players", key="nav_players", use_container_width=True):
-        st.switch_page("pages/2_players.py")
+        st.switch_page("pages/2_Players.py")
 
     st.markdown("### Live Scorer")
     st.write("Record points during live games")
     if st.button("Open Live Scorer", key="nav_scorer", use_container_width=True):
-        st.switch_page("pages/4_live_scorer.py")
+        st.switch_page("pages/4_Live_Scorer.py")
 
 st.divider()
 
