@@ -21,14 +21,12 @@ except ValueError as e:
 if connected:
     @st.cache_data(ttl=60)
     def fetch_teams():
-        response = supabase.table("teams").select("id, name").order("name").execute()
+        response = supabase.table("teams").select("name").order("name").execute()
         return response.data
 
     @st.cache_data(ttl=60)
     def fetch_games():
-        response = supabase.table("games").select(
-            "*, home_team:home_team_id(name), away_team:away_team_id(name)"
-        ).order("start_time", desc=True).execute()
+        response = supabase.table("games").select("*").order("start_time", desc=True).execute()
         return response.data
 
     teams = fetch_teams()
@@ -36,8 +34,7 @@ if connected:
     if len(teams) < 2:
         st.warning("You need at least 2 teams to create a game. Please add more teams first.")
     else:
-        team_options = {team['name']: team['id'] for team in teams}
-        team_id_to_name = {team['id']: team['name'] for team in teams}
+        team_names = [team['name'] for team in teams]
 
         # Add new game section
         st.subheader("Schedule New Game")
@@ -45,12 +42,12 @@ if connected:
             col1, col2 = st.columns(2)
 
             with col1:
-                home_team = st.selectbox("Home Team", options=list(team_options.keys()))
+                home_team = st.selectbox("Home Team", options=team_names)
                 game_date = st.date_input("Game Date", value=datetime.now())
                 location = st.text_input("Location", placeholder="e.g., Main Gym, Court 1")
 
             with col2:
-                away_team = st.selectbox("Away Team", options=list(team_options.keys()))
+                away_team = st.selectbox("Away Team", options=team_names)
 
                 # Time input in 12-hour format
                 st.write("Game Time")
@@ -79,8 +76,8 @@ if connected:
                         start_datetime = datetime.combine(game_date, game_time)
 
                         supabase.table("games").insert({
-                            "home_team_id": team_options[home_team],
-                            "away_team_id": team_options[away_team],
+                            "home_team_name": home_team,
+                            "away_team_name": away_team,
                             "start_time": start_datetime.isoformat(),
                             "location": location,
                             "status": "scheduled"
@@ -111,8 +108,8 @@ if connected:
 
         if games:
             for game in games:
-                home_name = game['home_team']['name'] if game['home_team'] else "Unknown"
-                away_name = game['away_team']['name'] if game['away_team'] else "Unknown"
+                home_name = game['home_team_name']
+                away_name = game['away_team_name']
 
                 # Parse start time
                 start_time = datetime.fromisoformat(game['start_time'].replace('Z', '+00:00'))

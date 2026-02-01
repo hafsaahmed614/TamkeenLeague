@@ -21,13 +21,13 @@ if connected:
     # Fetch teams for dropdown
     @st.cache_data(ttl=60)
     def fetch_teams():
-        response = supabase.table("teams").select("id, name").order("name").execute()
+        response = supabase.table("teams").select("name").order("name").execute()
         return response.data
 
-    # Fetch players with team info
+    # Fetch players
     @st.cache_data(ttl=60)
     def fetch_players():
-        response = supabase.table("players").select("*, teams(name)").order("name").execute()
+        response = supabase.table("players").select("*").order("name").execute()
         return response.data
 
     teams = fetch_teams()
@@ -35,9 +35,8 @@ if connected:
     if not teams:
         st.warning("No teams found. Please create teams first before adding players.")
     else:
-        # Create team name mapping
-        team_options = {team['name']: team['id'] for team in teams}
-        team_id_to_name = {team['id']: team['name'] for team in teams}
+        # Create team name list
+        team_names = [team['name'] for team in teams]
 
         # Add new player section
         st.subheader("Add New Player")
@@ -47,7 +46,7 @@ if connected:
             with col1:
                 player_name = st.text_input("Player Name")
             with col2:
-                selected_team = st.selectbox("Team", options=list(team_options.keys()))
+                selected_team = st.selectbox("Team", options=team_names)
             with col3:
                 jersey_number = st.number_input("Jersey #", min_value=0, max_value=99, value=0)
 
@@ -57,7 +56,7 @@ if connected:
                 try:
                     supabase.table("players").insert({
                         "name": player_name,
-                        "team_id": team_options[selected_team],
+                        "team_name": selected_team,
                         "jersey_number": jersey_number
                     }).execute()
                     st.success(f"Player '{player_name}' added to {selected_team}!")
@@ -75,7 +74,7 @@ if connected:
         st.subheader("Team Rosters")
         filter_team = st.selectbox(
             "Filter by Team",
-            options=["All Teams"] + list(team_options.keys()),
+            options=["All Teams"] + team_names,
             key="filter_team"
         )
 
@@ -83,12 +82,14 @@ if connected:
 
         # Apply filter
         if filter_team != "All Teams":
-            players = [p for p in players if p['team_id'] == team_options[filter_team]]
+            players = [p for p in players if p['team_name'] == filter_team]
 
         if players:
             # Group by team for display
-            for team_name in (list(team_options.keys()) if filter_team == "All Teams" else [filter_team]):
-                team_players = [p for p in players if team_id_to_name.get(p['team_id']) == team_name]
+            display_teams = team_names if filter_team == "All Teams" else [filter_team]
+
+            for team_name in display_teams:
+                team_players = [p for p in players if p['team_name'] == team_name]
 
                 if team_players:
                     st.markdown(f"### {team_name}")
@@ -120,10 +121,11 @@ if connected:
                                 with edit_col1:
                                     new_name = st.text_input("Name", value=player['name'])
                                 with edit_col2:
+                                    current_team_idx = team_names.index(player['team_name']) if player['team_name'] in team_names else 0
                                     new_team = st.selectbox(
                                         "Team",
-                                        options=list(team_options.keys()),
-                                        index=list(team_options.keys()).index(team_id_to_name[player['team_id']])
+                                        options=team_names,
+                                        index=current_team_idx
                                     )
                                 with edit_col3:
                                     new_jersey = st.number_input(
@@ -139,7 +141,7 @@ if connected:
                                         try:
                                             supabase.table("players").update({
                                                 "name": new_name,
-                                                "team_id": team_options[new_team],
+                                                "team_name": new_team,
                                                 "jersey_number": new_jersey
                                             }).eq("id", player['id']).execute()
                                             st.success("Player updated!")

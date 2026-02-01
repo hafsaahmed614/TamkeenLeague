@@ -65,3 +65,11 @@ with col2:
     if st.button("Open Live Scorer", key="nav_scorer", use_container_width=True):
         st.switch_page("pages/4_Live_Scorer.py")
 
+st.divider()
+
+# Rankings section
+st.markdown("### Rankings")
+st.write("Preview team standings and player leaderboards")
+if st.button("View Rankings", key="nav_rankings", use_container_width=True):
+    st.switch_page("pages/5_Rankings.py")
+
