@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import sys
 sys.path.append("..")
 
@@ -49,18 +50,18 @@ if connected:
         for team in teams:
             team_name = team['name']
             team_stats[team_name] = {
-                'name': team_name,
-                'wins': team['wins'],
-                'losses': team['losses'],
-                'pf': 0,  # Points For
-                'pa': 0,  # Points Against
+                'Team': team_name,
+                'W': team['wins'],
+                'L': team['losses'],
+                'PF': 0,
+                'PA': 0,
             }
 
         # Calculate PF from score_logs
         for log in score_logs:
             team_name = log['team_name']
             if team_name in team_stats:
-                team_stats[team_name]['pf'] += log['points']
+                team_stats[team_name]['PF'] += log['points']
 
         # Calculate PA (points scored against each team in their games)
         for game in games:
@@ -74,26 +75,34 @@ if connected:
 
             # Home team's PA is away team's score
             if home_team in team_stats:
-                team_stats[home_team]['pa'] += away_pts
+                team_stats[home_team]['PA'] += away_pts
             # Away team's PA is home team's score
             if away_team in team_stats:
-                team_stats[away_team]['pa'] += home_pts
+                team_stats[away_team]['PA'] += home_pts
 
         # Sort teams by wins (desc), then point differential (desc)
         sorted_teams = sorted(
             team_stats.values(),
-            key=lambda x: (x['wins'], x['pf'] - x['pa']),
+            key=lambda x: (x['W'], x['PF'] - x['PA']),
             reverse=True
         )
 
-        # Display standings table
-        st.markdown("| Rank | Team | W | L | PF | PA | Diff |")
-        st.markdown("|------|------|---|---|----|----|------|")
-
+        # Add rank and diff
+        standings_data = []
         for rank, team in enumerate(sorted_teams, 1):
-            diff = team['pf'] - team['pa']
-            diff_str = f"+{diff}" if diff > 0 else str(diff)
-            st.markdown(f"| {rank} | **{team['name']}** | {team['wins']} | {team['losses']} | {team['pf']} | {team['pa']} | {diff_str} |")
+            diff = team['PF'] - team['PA']
+            standings_data.append({
+                'Rank': rank,
+                'Team': team['Team'],
+                'W': team['W'],
+                'L': team['L'],
+                'PF': team['PF'],
+                'PA': team['PA'],
+                'Diff': f"+{diff}" if diff > 0 else str(diff)
+            })
+
+        df_standings = pd.DataFrame(standings_data)
+        st.dataframe(df_standings, use_container_width=True, hide_index=True)
 
     else:
         st.info("No teams found. Add teams to see standings.")
@@ -103,7 +112,7 @@ if connected:
     # ==========================================
     # PLAYER LEADERBOARD
     # ==========================================
-    st.subheader("Player Leaderboard")
+    st.subheader("Player Leaderboard - Top Scorers")
 
     if score_logs:
         # Aggregate player stats
@@ -115,34 +124,41 @@ if connected:
 
             if key not in player_stats:
                 player_stats[key] = {
-                    'name': player_name,
-                    'team': team_name,
-                    'total_points': 0,
+                    'Player': player_name,
+                    'Team': team_name,
+                    'PTS': 0,
                     'games': set()
                 }
 
-            player_stats[key]['total_points'] += log['points']
+            player_stats[key]['PTS'] += log['points']
             player_stats[key]['games'].add(log['game_id'])
 
         # Calculate PPG and sort by total points
         for key in player_stats:
             games_played = len(player_stats[key]['games'])
-            player_stats[key]['games_played'] = games_played
-            player_stats[key]['ppg'] = round(player_stats[key]['total_points'] / games_played, 1) if games_played > 0 else 0
+            player_stats[key]['GP'] = games_played
+            player_stats[key]['PPG'] = round(player_stats[key]['PTS'] / games_played, 1) if games_played > 0 else 0
 
         sorted_players = sorted(
             player_stats.values(),
-            key=lambda x: x['total_points'],
+            key=lambda x: x['PTS'],
             reverse=True
         )[:15]  # Top 15 scorers
 
-        # Display leaderboard
-        st.markdown("**Top Scorers**")
-        st.markdown("| Rank | Player | Team | GP | PTS | PPG |")
-        st.markdown("|------|--------|------|----|-----|-----|")
-
+        # Build leaderboard data
+        leaderboard_data = []
         for rank, player in enumerate(sorted_players, 1):
-            st.markdown(f"| {rank} | **{player['name']}** | {player['team']} | {player['games_played']} | {player['total_points']} | {player['ppg']} |")
+            leaderboard_data.append({
+                'Rank': rank,
+                'Player': player['Player'],
+                'Team': player['Team'],
+                'GP': player['GP'],
+                'PTS': player['PTS'],
+                'PPG': player['PPG']
+            })
+
+        df_leaderboard = pd.DataFrame(leaderboard_data)
+        st.dataframe(df_leaderboard, use_container_width=True, hide_index=True)
 
     else:
         st.info("No scoring data yet. Play some games to see the leaderboard.")
