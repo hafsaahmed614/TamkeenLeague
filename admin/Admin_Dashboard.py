@@ -11,12 +11,20 @@ st.set_page_config(
 # Custom CSS for Tamkeen branding with mobile responsiveness
 st.markdown("""
 <style>
+    .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
+    }
     .main-title {
         color: #8B0000;
         font-size: 48px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 0;
+        margin: 0;
         line-height: 1.2;
     }
     .sub-title {
@@ -47,8 +55,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main content
-st.markdown('<h1 class="main-title">Tamkeen Sports League</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Admin Dashboard</p>', unsafe_allow_html=True)
+st.markdown('''
+<div class="title-container">
+    <h1 class="main-title">Tamkeen Sports League</h1>
+    <p class="sub-title">Admin Dashboard</p>
+</div>
+''', unsafe_allow_html=True)
 
 st.divider()
 
