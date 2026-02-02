@@ -18,12 +18,16 @@ st.markdown("""
         text-align: center;
         margin-bottom: 0;
         line-height: 1.2;
+        width: 100%;
+        display: block;
     }
     .sub-title {
         color: #888;
         text-align: center;
         font-size: 18px;
         margin-top: 8px;
+        width: 100%;
+        display: block;
     }
     .stButton > button {
         background-color: #8B0000;
