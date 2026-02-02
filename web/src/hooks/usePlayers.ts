@@ -8,6 +8,7 @@ export function usePlayers(teamName?: string) {
   const [error, setError] = useState<string | null>(null)
 
   const fetchPlayers = async () => {
+    console.log('=== usePlayers fetch started for team:', teamName)
     try {
       setLoading(true)
       // Fetch all players and filter client-side to handle team names with spaces
@@ -15,6 +16,8 @@ export function usePlayers(teamName?: string) {
         .from('players')
         .select('*')
         .order('jersey_number', { ascending: true })
+
+      console.log('Supabase returned:', data?.length, 'players, error:', error)
 
       if (error) throw error
 
@@ -33,6 +36,7 @@ export function usePlayers(teamName?: string) {
       setPlayers(filteredPlayers)
       setError(null)
     } catch (e) {
+      console.error('usePlayers error:', e)
       setError((e as Error).message)
     } finally {
       setLoading(false)
