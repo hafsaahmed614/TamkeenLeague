@@ -5,6 +5,15 @@ import { Layout } from '../components/Layout'
 import { LoadingSpinner } from '../components/Loading'
 import { ErrorState } from '../components/ErrorState'
 
+// Get up to 2 initials from a team name (e.g., "Hijabi Hoopers" → "HH", "Team 3" → "T3")
+function getTeamInitials(name: string): string {
+  const words = name.trim().split(/\s+/)
+  if (words.length >= 2) {
+    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
+  }
+  return name.substring(0, 2).toUpperCase()
+}
+
 export function TeamSelector() {
   const navigate = useNavigate()
   const { teams, loading, error, refetch } = useTeams()
@@ -63,7 +72,7 @@ export function TeamSelector() {
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-tamkeen-primary rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
-                    {team.name.charAt(0)}
+                    {getTeamInitials(team.name)}
                   </span>
                 </div>
                 <div className="text-left">
@@ -91,7 +100,7 @@ export function TeamSelector() {
             }}
             className="text-tamkeen-primary font-medium hover:underline"
           >
-            View all teams instead
+            View All Teams
           </button>
         </div>
       </div>

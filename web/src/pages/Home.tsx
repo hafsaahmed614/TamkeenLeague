@@ -77,7 +77,7 @@ export function Home() {
       <div className="p-4 space-y-6">
         {/* Team Stats Card (if team selected) */}
         {selectedTeamName && myTeamStanding && (
-          <Link to={`/team/${selectedTeamName}`} className="block">
+          <Link to={`/team/${encodeURIComponent(selectedTeamName)}`} className="block">
             <div className="card p-4 bg-tamkeen-primary text-white">
               <div className="flex justify-between items-center mb-3">
                 <span className="text-sm opacity-80">Your Team</span>
@@ -153,7 +153,7 @@ export function Home() {
               {standings.slice(0, 5).map((team, index) => (
                 <Link
                   key={team.id}
-                  to={`/team/${team.name}`}
+                  to={`/team/${encodeURIComponent(team.name)}`}
                   className={`flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 ${
                     team.name === selectedTeamName ? 'bg-tamkeen-primary/5' : ''
                   } ${index < 4 ? 'border-b border-gray-100 dark:border-gray-700' : ''}`}

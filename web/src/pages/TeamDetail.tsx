@@ -13,6 +13,15 @@ import { useStandings } from '../hooks/useStandings'
 import { supabase } from '../lib/supabase'
 import type { ScoreLog } from '../types'
 
+// Get up to 2 initials from a team name (e.g., "Hijabi Hoopers" → "HH", "Team 3" → "T3")
+function getTeamInitials(name: string): string {
+  const words = name.trim().split(/\s+/)
+  if (words.length >= 2) {
+    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
+  }
+  return name.substring(0, 2).toUpperCase()
+}
+
 type Tab = 'roster' | 'games'
 
 export function TeamDetail() {
@@ -76,7 +85,7 @@ export function TeamDetail() {
       <div className="bg-tamkeen-primary text-white p-6">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-            <span className="text-3xl font-bold">{decodedTeamName.charAt(0)}</span>
+            <span className="text-3xl font-bold">{getTeamInitials(decodedTeamName)}</span>
           </div>
           <div>
             <h1 className="text-2xl font-bold">{decodedTeamName}</h1>
