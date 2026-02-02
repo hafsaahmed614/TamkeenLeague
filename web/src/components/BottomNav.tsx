@@ -41,14 +41,14 @@ const navItems = [
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 safe-bottom z-50">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800 safe-bottom z-50">
       <div className="flex justify-around items-center h-16 max-w-lg mx-auto">
         {navItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `nav-item flex-1 ${isActive ? 'active text-tamkeen-primary' : ''}`
+              `nav-item flex-1 ${isActive ? 'active text-tamkeen-primary' : 'text-black/60 dark:text-white/60'}`
             }
           >
             {item.icon}

@@ -10,12 +10,12 @@
   }
 
   body {
-    @apply bg-tamkeen-secondary dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply bg-tamkeen-secondary dark:bg-black text-black dark:text-white;
     @apply min-h-screen font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading text-black dark:text-white;
   }
 
   /* Safe area padding for notched devices */
@@ -39,8 +39,8 @@
   }
 
   .btn-secondary {
-    @apply btn bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
-    @apply hover:bg-gray-200 dark:hover:bg-gray-700;
+    @apply btn bg-gray-200 dark:bg-gray-800 text-black dark:text-white;
+    @apply hover:bg-gray-300 dark:hover:bg-gray-700;
   }
 
   .btn-accent {
@@ -50,20 +50,20 @@
 
   /* Card component */
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm;
-    @apply border border-gray-100 dark:border-gray-700;
+    @apply bg-white dark:bg-gray-900 rounded-xl shadow-sm;
+    @apply border border-gray-200 dark:border-gray-800;
   }
 
   /* Navigation item */
   .nav-item {
     @apply flex flex-col items-center justify-center;
     @apply min-h-touch min-w-touch p-2;
-    @apply text-gray-500 dark:text-gray-400;
+    @apply text-black/60 dark:text-white/60;
     @apply transition-colors duration-200;
   }
 
   .nav-item.active {
-    @apply text-tamkeen-primary;
+    @apply text-tamkeen-primary dark:text-tamkeen-primary;
   }
 
   /* Pull to refresh indicator */

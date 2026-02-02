@@ -44,10 +44,10 @@ export function TeamSelector() {
             alt="Tamkeen League"
             className="w-24 h-24 mb-6"
           />
-          <h1 className="text-2xl font-bold font-heading text-tamkeen-primary dark:text-white mb-2">
+          <h1 className="text-2xl font-bold font-heading text-tamkeen-primary mb-2">
             Tamkeen League
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-center font-body">
+          <p className="text-black dark:text-white text-center font-body">
             Select Your Team
           </p>
         </div>
@@ -67,15 +67,15 @@ export function TeamSelector() {
                   </span>
                 </div>
                 <div className="text-left">
-                  <div className="font-medium text-gray-900 dark:text-white">
+                  <div className="font-medium text-black dark:text-white">
                     {team.name}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-sm text-black/60 dark:text-white/60">
                     {team.wins}-{team.losses} Record
                   </div>
                 </div>
               </div>
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-black/40 dark:text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
