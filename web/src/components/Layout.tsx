@@ -7,7 +7,7 @@ interface LayoutProps {
 
 export function Layout({ children, hideNav }: LayoutProps) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-tamkeen-secondary dark:bg-black">
       <main className={`max-w-lg mx-auto ${hideNav ? '' : 'pb-20'}`}>
         {children}
       </main>
