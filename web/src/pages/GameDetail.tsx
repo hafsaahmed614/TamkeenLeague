@@ -9,6 +9,15 @@ import { formatFullDate, formatGameTime } from '../lib/supabase'
 import { shareGameResult } from '../lib/share'
 import type { ScoreLog } from '../types'
 
+// Get up to 2 initials from a team name (e.g., "Hijabi Hoopers" → "HH", "Team 3" → "T3")
+function getTeamInitials(name: string): string {
+  const words = name.trim().split(/\s+/)
+  if (words.length >= 2) {
+    return (words[0].charAt(0) + words[1].charAt(0)).toUpperCase()
+  }
+  return name.substring(0, 2).toUpperCase()
+}
+
 export function GameDetail() {
   const { gameId } = useParams<{ gameId: string }>()
   const { game, scoreLogs, loading, error, refetch } = useGameWithScores(
@@ -100,9 +109,9 @@ export function GameDetail() {
         <div className="flex items-center justify-center gap-4">
           {/* Home team */}
           <div className="flex-1 text-center">
-            <Link to={`/team/${game.home_team_name}`}>
+            <Link to={`/team/${encodeURIComponent(game.home_team_name)}`}>
               <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2">
-                <span className="text-2xl font-bold">{game.home_team_name.charAt(0)}</span>
+                <span className="text-2xl font-bold">{getTeamInitials(game.home_team_name)}</span>
               </div>
               <div className="font-medium truncate">{game.home_team_name}</div>
             </Link>
@@ -120,9 +129,9 @@ export function GameDetail() {
 
           {/* Away team */}
           <div className="flex-1 text-center">
-            <Link to={`/team/${game.away_team_name}`}>
+            <Link to={`/team/${encodeURIComponent(game.away_team_name)}`}>
               <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2">
-                <span className="text-2xl font-bold">{game.away_team_name.charAt(0)}</span>
+                <span className="text-2xl font-bold">{getTeamInitials(game.away_team_name)}</span>
               </div>
               <div className="font-medium truncate">{game.away_team_name}</div>
             </Link>

@@ -108,7 +108,7 @@ export function Leaderboard() {
                   {index + 1}
                 </span>
                 <div className="min-w-0">
-                  <Link to={`/team/${player.team_name}`} className="block">
+                  <Link to={`/team/${encodeURIComponent(player.team_name)}`} className="block">
                     <div className="font-medium truncate">{player.player_name}</div>
                     <div className="text-xs text-gray-500 truncate">{player.team_name}</div>
                   </Link>
