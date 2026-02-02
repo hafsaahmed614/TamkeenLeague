@@ -21,7 +21,13 @@ export function usePlayers(teamName?: string) {
       // Filter by team name client-side
       let filteredPlayers = data || []
       if (teamName) {
+        // Debug: log all unique team names from players table
+        const uniqueTeamNames = [...new Set((data || []).map(p => p.team_name))]
+        console.log('Looking for team:', JSON.stringify(teamName))
+        console.log('Available team names in players table:', uniqueTeamNames.map(n => JSON.stringify(n)))
+
         filteredPlayers = filteredPlayers.filter(p => p.team_name === teamName)
+        console.log('Found players:', filteredPlayers.length)
       }
 
       setPlayers(filteredPlayers)
