@@ -4,7 +4,6 @@ import { Layout } from '../components/Layout'
 import { Header } from '../components/Header'
 import { GameCard } from '../components/GameCard'
 import { LoadingSpinner, GameCardSkeleton } from '../components/Loading'
-import { ErrorState } from '../components/ErrorState'
 import { EmptyState } from '../components/EmptyState'
 import { useTeam } from '../hooks/useTeams'
 import { useLiveGames, useGames } from '../hooks/useGames'
@@ -17,7 +16,7 @@ import type { ScoreLog } from '../types'
 export function Home() {
   const selectedTeamName = getSelectedTeam()
   const { team } = useTeam(selectedTeamName)
-  const { games: liveGames, loading: liveLoading } = useLiveGames()
+  const { games: liveGames } = useLiveGames()
   const { games: upcomingGames, loading: upcomingLoading } = useGames(selectedTeamName, 'scheduled')
   const { standings, loading: standingsLoading } = useStandings()
   const { players: topPlayers, loading: playersLoading } = useLeaderboard(3)
